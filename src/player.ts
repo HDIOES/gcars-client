@@ -23,7 +23,6 @@ export class Player {
         this.playerSprite.width = width;
         this.playerSprite.height = height;
         this.playerSprite.anchor.setTo(0.5, 0.5);
-        this.playerSprite.rotation = -1.57;
         if (cameraFollow) {
             this.websocket = websocket;
             this.game.camera.follow(this.playerSprite);

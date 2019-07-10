@@ -32,20 +32,20 @@ class GcarsGame {
     }
 
     create() {
-        this.game.add.tileSprite(0, 0, 2000, 2000, 'background');
-        this.game.world.setBounds(0, 0, 2000, 2000);
+        this.game.add.tileSprite(0, 0, 8000, 8000, 'background');
+        this.game.world.setBounds(0, 0, 8000, 8000);
         this.websocket = new WebSocket(URL);
         this.currentPlayer = new Player(
-            this.game.world.randomX,
-            this.game.world.randomY,
+            4000,
+            4000,
             this.game,
             'car',
-            80,
             160,
+            80,
             this.websocket,
             true);
         this.websocket.onmessage = (em) => {
-            var data = JSON.parse(em.data)
+            var data = JSON.parse(em.data);
             this.currentPlayer.moveTo(data.x, data.y, data.angle);
         };
         this.websocket.onclose = (em) => {

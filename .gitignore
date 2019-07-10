@@ -1,6 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
-Будет удалено .idea/gcars-client.iml
-Будет удалено .idea/inspectionProfiles/
-Будет удалено .idea/misc.xml
-Будет удалено .idea/modules.xml
-Будет удалено .idea/workspace.xml
+/.idea/gcars-client.iml
+/.idea/inspectionProfiles/
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/
+/dist/
+/node_modules/
