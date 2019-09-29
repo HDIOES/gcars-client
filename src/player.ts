@@ -44,18 +44,23 @@ export class Player {
     }
 
     public update() {
-        if (this.game.input.gamepad.supported && this.game.input.gamepad.active) {
-            var xboxStickLeftX: number = this.gamepad.pad1.axis(PhaserCE.Gamepad.XBOX360_STICK_LEFT_X);
-            var xboxStickLeftY: number = this.gamepad.pad1.axis(PhaserCE.Gamepad.XBOX360_STICK_LEFT_Y);
-            if (xboxStickLeftX < -0.1 && xboxStickLeftX > 0.1 && xboxStickLeftY < -0.1 && xboxStickLeftY > 0.1) {
-                var distance: number = Math.sqrt(xboxStickLeftX^2+xboxStickLeftY^2)   
-                this.angle = Math.asin(xboxStickLeftY / distance)
+        if (this.gamepad.supported && this.gamepad.enabled && this.gamepad.pad1.connected && this.gamepad.active) {
+            //console.log(this.gamepad.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X))
+            var xboxStickLeftX: number = this.gamepad.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X);
+            var xboxStickLeftY: number = this.gamepad.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y);
+            if (xboxStickLeftX || xboxStickLeftY) {
+                var distance: number = Math.sqrt(xboxStickLeftX*xboxStickLeftX+xboxStickLeftY*xboxStickLeftY);
+                if (xboxStickLeftY >= 0) {
+                    this.angle = Math.acos(xboxStickLeftX / distance);
+                } else {
+                    this.angle = Math.acos(-xboxStickLeftX / distance) + Math.PI;
+                }
+                //console.log(this.angle);
+                //this.websocket.send(JSON.stringify({angle: this.angle}))
             }
-            if (this.gamepad.justPressed(Phaser.Gamepad.XBOX360_A))
-            {
+            if (this.gamepad.justPressed(Phaser.Gamepad.XBOX360_A)) {
                 
             }
-            //this.websocket.send(JSON.stringify({angle: this.angle}))
         }
         this.playerSprite.x = this.receivedX;
         this.playerSprite.y = this.receivedY;
